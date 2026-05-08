@@ -54,26 +54,5 @@ public class SecurityConfig {
                 .build();
     }
 
-    @Bean
-    public CorsWebFilter corsWebFilter() {
-
-        CorsConfiguration config = new CorsConfiguration();
-
-        config.setAllowedOriginPatterns(List.of(
-                "http://localhost:4200",
-                "https://*.up.railway.app"
-        ));
-
-        config.setAllowedMethods(List.of("*"));
-        config.setAllowedHeaders(List.of("*"));
-        config.setExposedHeaders(List.of("*"));
-        config.setAllowCredentials(true);
-
-        UrlBasedCorsConfigurationSource source =
-                new UrlBasedCorsConfigurationSource();
-
-        source.registerCorsConfiguration("/**", config);
-
-        return new CorsWebFilter(source);
-    }
+   
 }
