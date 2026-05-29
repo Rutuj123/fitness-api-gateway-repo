@@ -1,5 +1,5 @@
 #server:
-#  port: 8080
+#  port: 8081
 #
 #spring:
 # cloud:
@@ -7,40 +7,25 @@
 #   server:
 #    webflux:
 #      routes:
-#
 #        - id: auth-service
 #          uri: http://localhost:8086
 #          predicates:
-#            - Path=/auth/**
+#            - Path=/auth/**,/trainers/**,/visitor/**
 #
-#        - id: member-service
-#          uri: http://localhost:8081
+#        - id: MEMBER-SERVICE
+#          uri: http://localhost:8082
 #          predicates:
-#            - Path=/members/**
-#
-#        - id: booking-service
-#          uri: http://localhost:8084
-#          predicates:
-#            - Path=/bookings/**
-#
-#        - id: payment-service
-#          uri: http://localhost:8085
-#          predicates:
-#            - Path=/payments/**
-#
-#        - id: trainer-service
-#          uri: http://localhost:8083
-#          predicates:
-#            - Path=/trainers/**
+#            - Path=/members/**,/bookings/**,/payments/**,/classes/**
+
 
 #use it for local
 #server:
-#  port: 8081
+# port: 8081
 #
 #spring:
 # application:
 #  name: api-gateway	
-
+#
 # cloud:
 #    gateway:
 #      routes:
@@ -50,9 +35,14 @@
 #            - Path=/auth/**,/trainers/**
 #
 #        - id: member-service
-#          uri: lb://member-service
+#          uri: lb://MEMBER-SERVICE
 #          predicates:
 #            - Path=/members/**,/bookings/**,/payments/**,/classes/**,
+#eureka:
+#  client:
+#    service-url:
+#      defaultZone: http://localhost:8761/eureka 						
+
 #to upload project on Railway i am doing below changes
 
 server:
@@ -65,24 +55,24 @@ spring:
     gateway:
       routes:
         - id: auth-service
-          uri: lb://AUTH-SERVICE
+          uri: https://fitness-auth-service-repo-production.up.railway.app/
           predicates:
             - Path=/auth/**,/trainers/**
 
         - id: member-service
-          uri: lb://MEMBER-SERVICE
+          uri: https://fitness-member-service-repo-production.up.railway.app/
           predicates:
            - Path=/members/**,/bookings/**,/payments/**,/classes/**,
 
-eureka:
-  client:
-    service-url:
-      defaultZone: ${EUREKA_URL:http://localhost:8761/eureka}
-  instance:
-    hostname: ${EUREKA_INSTANCE_HOSTNAME}
-    non-secure-port-enabled: false
-    secure-port-enabled: true
-    secure-port: 443
-    status-page-url: https://${EUREKA_INSTANCE_HOSTNAME}/actuator/info
-    health-check-url: https://${EUREKA_INSTANCE_HOSTNAME}/actuator/health
-    home-page-url: https://${EUREKA_INSTANCE_HOSTNAME}
+#eureka:
+#  client:
+#    service-url:
+#      defaultZone: ${EUREKA_URL:http://localhost:8761/eureka}
+#  instance:
+#    hostname: ${EUREKA_INSTANCE_HOSTNAME}
+#    non-secure-port-enabled: false
+#    secure-port-enabled: true
+#    secure-port: 443
+#    status-page-url: https://${EUREKA_INSTANCE_HOSTNAME}/actuator/info
+#    health-check-url: https://${EUREKA_INSTANCE_HOSTNAME}/actuator/health
+#    home-page-url: https://${EUREKA_INSTANCE_HOSTNAME}
