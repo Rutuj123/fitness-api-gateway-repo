@@ -32,7 +32,7 @@
 #        - id: auth-service
 #          uri: lb://auth-service 
 #          predicates:
-#            - Path=/auth/**,/trainers/**
+#            - Path=/auth/**,/trainers/**,/visitor/**
 #
 #        - id: member-service
 #          uri: lb://MEMBER-SERVICE
@@ -57,7 +57,7 @@ spring:
         - id: auth-service
           uri: https://fitness-auth-service-repo-production.up.railway.app/
           predicates:
-            - Path=/auth/**,/trainers/**
+            - Path=/auth/**,/trainers/**,/visitor/**
 
         - id: member-service
           uri: https://fitness-member-service-repo-production.up.railway.app/
